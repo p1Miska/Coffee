@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кофейник — меню</title>
+<meta name="description" content="Кофейник — маленькая кофейня. Авторское и классическое меню.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700;900&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- decorative SVG flourish, reused across the page -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="petal-burst">
+      <path class="petal" d="M50 50 C40 20, 20 10, 5 5 C20 25, 25 45, 50 50 Z"/>
+      <path class="petal" d="M50 50 C55 15, 75 5, 95 0 C75 20, 65 40, 50 50 Z"/>
+      <path class="petal" d="M50 50 C25 55, 10 70, 0 90 C25 80, 45 70, 50 50 Z"/>
+      <path class="petal" d="M50 50 C70 60, 85 80, 92 98 C70 90, 55 72, 50 50 Z"/>
+      <path class="petal" d="M50 50 C75 45, 92 55, 100 65 C78 58, 62 55, 50 50 Z"/>
+      <path class="petal" d="M50 50 C30 35, 10 35, 0 40 C20 35, 38 38, 50 50 Z"/>
+      <path class="petal" d="M50 50 C60 75, 60 95, 58 105 C50 88, 48 68, 50 50 Z"/>
+      <path class="petal" d="M50 50 C35 10, 40 -5, 45 -12 C48 8, 48 30, 50 50 Z"/>
+    </g>
+  </defs>
+</svg>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="#" class="logo" data-view-link="menu">
+      <span class="logo-text">Кофейник</span>
+    </a>
+
+    <button class="burger" id="burgerBtn" aria-label="Меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav class="nav-panel" id="navPanel">
+    <div class="nav-panel-inner">
+      <a href="#" class="nav-link is-current" data-view-link="menu">Меню</a>
+      <a href="#" class="nav-link" data-view-link="info">Информация и адрес</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ===================== VIEW: MENU ===================== -->
+  <div class="view is-active" id="view-menu">
+
+    <section class="hero">
+      <svg class="hero-flourish hero-flourish--1" viewBox="0 0 100 100" aria-hidden="true"><use href="#petal-burst"/></svg>
+      <svg class="hero-flourish hero-flourish--2" viewBox="0 0 100 100" aria-hidden="true"><use href="#petal-burst"/></svg>
+      <p class="hero-eyebrow">маленькая кофейня</p>
+      <h1 class="hero-title">Кофейник</h1>
+      <p class="hero-sub">Авторские напитки, классика и кое-что перекусить</p>
+      <a href="#menu-grid-anchor" class="hero-cta">Смотреть меню ↓</a>
+    </section>
+
+    <section class="menu-section" id="menu-grid-anchor">
+      <div class="tabs-sentinel" id="tabsSentinel"></div>
+      <div class="tabs-bar" id="tabsBar">
+        <div class="tabs" id="tabs" role="tablist"></div>
+      </div>
+      <div class="menu-grid" id="menuGrid"></div>
+    </section>
+
+  </div>
+
+  <!-- ===================== VIEW: INFO + MAP ===================== -->
+  <div class="view" id="view-info">
+
+    <section class="info-hero">
+      <h1 class="section-title">Информация</h1>
+      <div class="info-badges">
+        <div class="badge">
+          <span class="badge-label">Работаем</span>
+          <span class="badge-value">09:00 – 21:00</span>
+          <span class="badge-sub">каждый день</span>
+        </div>
+        <div class="badge">
+          <span class="badge-label">Адрес</span>
+          <span class="badge-value badge-value--sm">Кузнецкий пр-т, 18</span>
+          <span class="badge-sub">Кемерово</span>
+        </div>
+      </div>
+      <p class="info-text">Кофейник — это маленькая кофейня: авторские напитки на сиропах и соках,
+        матча в нескольких настроениях и классика для тех, кто знает, чего хочет.
+        Каждый напиток можно взять в удобном для вас объёме.</p>
+    </section>
+
+    <section class="contacts-section" id="contacts">
+      <div class="contacts-inner reveal">
+        <h2 class="section-title">Как нас найти</h2>
+        <p class="contacts-text">Кемерово, Кузнецкий проспект, 18</p>
+        <div class="map-placeholder">
+          <iframe class="map-frame"
+            src="https://yandex.ru/map-widget/v1/?ll=86.071473%2C55.362041&z=17&l=map&pt=86.071473,55.362041,pm2rdl"
+            frameborder="0" loading="lazy"></iframe>
+          <svg class="map-flourish" viewBox="0 0 100 100" aria-hidden="true"><use href="#petal-burst"/></svg>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-text logo-text--footer">Кофейник</span>
+    </div>
+    <div class="footer-legal">
+      <p>ИП Ярилко Маргарита Дмитриевна</p>
+      <p>ИНН 420537347106 · ОГРНИП 326420500042304</p>
+      <p>Межрайонная ИФНС России №15 по Кемеровской области — Кузбассу</p>
+    </div>
+    <div class="footer-hours">Кемерово, Кузнецкий проспект, 18 · 09:00–21:00 каждый день</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
