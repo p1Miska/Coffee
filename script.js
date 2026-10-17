@@ -138,7 +138,7 @@ function init(){
     btn.type = 'button';
     btn.id = 'tab-' + cat.id;
     btn.className = 'tab-btn' + (i === 0 ? ' is-active' : '');
-    btn.innerHTML = `<span class="tab-number">0${i + 1}</span><span class="tab-label">${cat.label}</span><span class="tab-count">${cat.items.length}</span>`;
+    btn.textContent = cat.label;
     btn.setAttribute('aria-label', cat.label);
     btn.setAttribute('role', 'tab');
     btn.setAttribute('aria-controls', 'menuGrid');
