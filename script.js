@@ -121,6 +121,7 @@ function renderCategory(cat, grid, animate){
 
 function init(){
   const tabsEl = document.getElementById('tabs');
+  const headerTabsEl = document.getElementById('headerTabs');
   const tabsBarEl = document.getElementById('tabsBar');
   const gridEl = document.getElementById('menuGrid');
   const menuAnchor = document.getElementById('menu-grid-anchor');
@@ -133,78 +134,91 @@ function init(){
   syncHeaderHeight();
   window.addEventListener('resize', syncHeaderHeight);
 
-  CATEGORIES.forEach((cat, i) => {
+  let activeCategoryId = CATEGORIES[0].id;
+
+  function selectCategory(cat, source){
+    if (cat.id === activeCategoryId) return;
+    activeCategoryId = cat.id;
+    [tabsEl, headerTabsEl].forEach(group => {
+      group.querySelectorAll('[role="tab"]').forEach(button => {
+        const selected = button.dataset.category === cat.id;
+        button.classList.toggle('is-active', selected);
+        button.setAttribute('aria-selected', String(selected));
+        button.tabIndex = selected ? 0 : -1;
+      });
+    });
+    gridEl.setAttribute('aria-label', cat.label);
+    renderCategory(cat, gridEl, true);
+    (source === headerTabsEl ? gridEl : menuAnchor)
+      .scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function addCategoryTab(cat, i, group, compact){
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.id = 'tab-' + cat.id;
-    btn.className = 'tab-btn' + (i === 0 ? ' is-active' : '');
-    btn.textContent = cat.label;
+    btn.id = (compact ? 'header-tab-' : 'tab-') + cat.id;
+    btn.className = (compact ? 'header-tab-btn' : 'tab-btn') + (i === 0 ? ' is-active' : '');
+    btn.textContent = compact ? (cat.id === 'classic' ? 'Классика' : 'Авторские') : cat.label;
+    btn.dataset.category = cat.id;
     btn.setAttribute('aria-label', cat.label);
     btn.setAttribute('role', 'tab');
     btn.setAttribute('aria-controls', 'menuGrid');
     btn.setAttribute('aria-selected', String(i === 0));
     btn.tabIndex = i === 0 ? 0 : -1;
-    btn.addEventListener('click', () => {
-      if (btn.classList.contains('is-active')) return;
-      tabsEl.querySelectorAll('.tab-btn').forEach(b => {
-        b.classList.remove('is-active');
-        b.setAttribute('aria-selected', 'false');
-        b.tabIndex = -1;
-      });
-      btn.classList.add('is-active');
-      btn.setAttribute('aria-selected', 'true');
-      btn.tabIndex = 0;
-      gridEl.setAttribute('aria-labelledby', btn.id);
-      renderCategory(cat, gridEl, true);
-      // smoothly bring the list back to its top when switching sections
-      if (menuAnchor){
-        menuAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
+    btn.addEventListener('click', () => selectCategory(cat, group));
     btn.addEventListener('keydown', (event) => {
       if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
       event.preventDefault();
-      const buttons = Array.from(tabsEl.querySelectorAll('.tab-btn'));
+      const buttons = Array.from(group.querySelectorAll('[role="tab"]'));
       const current = buttons.indexOf(btn);
       const next = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1 :
         (current + (event.key === 'ArrowRight' ? 1 : -1) + buttons.length) % buttons.length;
       buttons[next].focus();
       buttons[next].click();
     });
-    tabsEl.appendChild(btn);
+    group.appendChild(btn);
+  }
+
+  CATEGORIES.forEach((cat, i) => {
+    addCategoryTab(cat, i, tabsEl, false);
+    addCategoryTab(cat, i, headerTabsEl, true);
   });
 
-  gridEl.setAttribute('aria-labelledby', 'tab-' + CATEGORIES[0].id);
+  gridEl.setAttribute('aria-label', CATEGORIES[0].label);
   renderCategory(CATEGORIES[0], gridEl, false);
 
-  // Detect when the sticky tabs bar is actually "stuck" to the top, so it
-  // can swap to a header-matching dark colour instead of blending into the
-  // light page background scrolling underneath it. This is driven directly
-  // off scroll position (rAF-throttled) rather than IntersectionObserver —
-  // IO callbacks fire a frame or two late, which was visible as the bar
-  // staying dark for a moment after the lighter section above it had
-  // already scrolled into view.
-  //
-  // The two trigger points are deliberately asymmetric:
-  // - turns dark only once safely PAST the stick point (darkPad) — so it
-  //   never goes dark while any light content could still show above it.
-  // - turns light a good bit BEFORE reaching the stick point (lightPad) —
-  //   so it's already light well ahead of any light pixel becoming visible.
+  // On wide screens, the section tabs move into the header once their
+  // original row scrolls away. Smaller screens keep the sticky row.
   const tabsSentinel = document.getElementById('tabsSentinel');
-  const DARK_PAD = 90;   // px past the stick point required before → dark
-  const LIGHT_PAD = 60;  // px of lead room *before* the stick point to → light
+  const DARK_PAD = 90;
+  const LIGHT_PAD = 60;
   let stuck = false;
   let tickingSticky = false;
 
   function updateStickyColor(){
     tickingSticky = false;
     if (!tabsSentinel || !tabsBarEl) return;
+    const menuVisible = document.getElementById('view-menu').classList.contains('is-active');
+    if (window.matchMedia('(min-width: 960px)').matches){
+      const showHeaderTabs = menuVisible &&
+        tabsBarEl.getBoundingClientRect().bottom <= header.offsetHeight;
+      header.classList.toggle('show-category-nav', showHeaderTabs);
+      tabsBarEl.classList.remove('is-stuck');
+      stuck = false;
+      return;
+    }
+    header.classList.remove('show-category-nav');
+    if (!menuVisible){
+      tabsBarEl.classList.remove('is-stuck');
+      stuck = false;
+      return;
+    }
     const stickPoint = header.offsetHeight;
     const d = tabsSentinel.getBoundingClientRect().top;
     if (!stuck && d <= stickPoint - DARK_PAD) {
-      stuck = true;   // scrolled solidly past the stick point — safe to go dark
+      stuck = true;
     } else if (stuck && d >= stickPoint - LIGHT_PAD) {
-      stuck = false;  // still short of the actual unstick point — go light early, with margin
+      stuck = false;
     }
     tabsBarEl.classList.toggle('is-stuck', stuck);
   }
