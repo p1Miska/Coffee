@@ -187,8 +187,8 @@ function init(){
   gridEl.setAttribute('aria-label', CATEGORIES[0].label);
   renderCategory(CATEGORIES[0], gridEl, false);
 
-  // On wide screens, the section tabs move into the header once their
-  // original row scrolls away. Smaller screens keep the sticky row.
+  // On wide and phone screens, the section tabs move into the header once
+  // their original row scrolls away. Medium screens keep the sticky row.
   const tabsSentinel = document.getElementById('tabsSentinel');
   const DARK_PAD = 90;
   const LIGHT_PAD = 60;
@@ -199,7 +199,7 @@ function init(){
     tickingSticky = false;
     if (!tabsSentinel || !tabsBarEl) return;
     const menuVisible = document.getElementById('view-menu').classList.contains('is-active');
-    if (window.matchMedia('(min-width: 960px)').matches){
+    if (window.matchMedia('(min-width: 960px), (max-width: 720px)').matches){
       const showHeaderTabs = menuVisible &&
         tabsBarEl.getBoundingClientRect().bottom <= header.offsetHeight;
       header.classList.toggle('show-category-nav', showHeaderTabs);
