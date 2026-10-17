@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Кофейник — меню</title>
-<meta name="description" content="Кофейник — маленькая кофейня. Авторское и классическое меню.">
+<meta name="description" content="Кофейник — маленькая кофейня в Кемерово. Классические и авторские напитки.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700;900&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -34,17 +34,17 @@
       <span class="logo-text">Кофейник</span>
     </a>
 
-    <button class="burger" id="burgerBtn" aria-label="Меню" aria-expanded="false">
+    <nav class="nav-panel" id="navPanel" aria-label="Основная навигация">
+      <div class="nav-panel-inner">
+        <a href="#" class="nav-link is-current" data-view-link="menu" aria-current="page">Меню</a>
+        <a href="#info" class="nav-link" data-view-link="info">Адрес и время работы</a>
+      </div>
+    </nav>
+
+    <button class="burger" id="burgerBtn" type="button" aria-label="Меню" aria-controls="navPanel" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
-
-  <nav class="nav-panel" id="navPanel">
-    <div class="nav-panel-inner">
-      <a href="#" class="nav-link is-current" data-view-link="menu">Меню</a>
-      <a href="#" class="nav-link" data-view-link="info">Информация и адрес</a>
-    </div>
-  </nav>
 </header>
 
 <main id="top">
@@ -57,16 +57,23 @@
       <svg class="hero-flourish hero-flourish--2" viewBox="0 0 100 100" aria-hidden="true"><use href="#petal-burst"/></svg>
       <p class="hero-eyebrow">маленькая кофейня</p>
       <h1 class="hero-title">Кофейник</h1>
-      <p class="hero-sub">Авторские напитки, классика и кое-что перекусить</p>
+      <p class="hero-sub">Классические и авторские напитки на каждый день</p>
       <a href="#menu-grid-anchor" class="hero-cta">Смотреть меню ↓</a>
     </section>
 
     <section class="menu-section" id="menu-grid-anchor">
+      <div class="menu-intro">
+        <div>
+          <p class="menu-kicker">Наше меню</p>
+          <h2 class="menu-title">Выберите свой напиток</h2>
+        </div>
+        <p class="menu-note">Тёплая классика и напитки с характером</p>
+      </div>
       <div class="tabs-sentinel" id="tabsSentinel"></div>
       <div class="tabs-bar" id="tabsBar">
-        <div class="tabs" id="tabs" role="tablist"></div>
+        <div class="tabs" id="tabs" role="tablist" aria-label="Разделы напитков"></div>
       </div>
-      <div class="menu-grid" id="menuGrid"></div>
+      <div class="menu-grid" id="menuGrid" role="tabpanel"></div>
     </section>
 
   </div>
@@ -75,33 +82,43 @@
   <div class="view" id="view-info">
 
     <section class="info-hero">
-      <h1 class="section-title">Информация</h1>
-      <div class="info-badges">
-        <div class="badge">
-          <span class="badge-label">Работаем</span>
-          <span class="badge-value">09:00 – 21:00</span>
-          <span class="badge-sub">каждый день</span>
+      <div class="info-inner">
+        <div class="info-copy">
+          <p class="info-eyebrow">Ждём вас в Кемерове</p>
+          <h1 class="info-title">Заглядывайте<br>на кофе</h1>
+          <p class="info-text">Классический кофе, авторские напитки и немного времени для себя. Выбирайте вкус в меню — мы будем рады встрече.</p>
+          <a href="#" class="info-menu-link" data-view-link="menu">Посмотреть меню <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="badge">
-          <span class="badge-label">Адрес</span>
-          <span class="badge-value badge-value--sm">Кузнецкий пр-т, 18</span>
-          <span class="badge-sub">Кемерово</span>
+        <div class="visit-card">
+          <p class="visit-card-top">Кофейник <span>●</span> Кемерово</p>
+          <div class="visit-detail">
+            <span class="visit-label">Адрес</span>
+            <strong>Кузнецкий проспект, 18</strong>
+            <span class="visit-sub">Кемерово</span>
+          </div>
+          <div class="visit-detail">
+            <span class="visit-label">Время работы</span>
+            <strong>09:00 – 21:00</strong>
+            <span class="visit-sub">каждый день</span>
+          </div>
+          <a class="visit-map-link" href="https://yandex.ru/maps/?text=%D0%9A%D0%B5%D0%BC%D0%B5%D1%80%D0%BE%D0%B2%D0%BE%2C%20%D0%9A%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%2C%2018" target="_blank" rel="noopener noreferrer">Открыть в Яндекс Картах <span aria-hidden="true">↗</span></a>
         </div>
       </div>
-      <p class="info-text">Кофейник — это маленькая кофейня: авторские напитки на сиропах и соках,
-        матча в нескольких настроениях и классика для тех, кто знает, чего хочет.
-        Каждый напиток можно взять в удобном для вас объёме.</p>
     </section>
 
     <section class="contacts-section" id="contacts">
-      <div class="contacts-inner reveal">
-        <h2 class="section-title">Как нас найти</h2>
-        <p class="contacts-text">Кемерово, Кузнецкий проспект, 18</p>
-        <div class="map-placeholder">
+      <div class="contacts-inner">
+        <div class="contacts-copy">
+          <p class="contacts-eyebrow">Где мы</p>
+          <h2 class="section-title">Найдите нас<br>на карте</h2>
+          <p class="contacts-text">Кемерово<br>Кузнецкий проспект, 18</p>
+          <a class="map-action" href="https://yandex.ru/maps/?text=%D0%9A%D0%B5%D0%BC%D0%B5%D1%80%D0%BE%D0%B2%D0%BE%2C%20%D0%9A%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%2C%2018" target="_blank" rel="noopener noreferrer">Открыть карту <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="map-shell">
+          <div class="map-fallback">Кемерово · Кузнецкий проспект, 18</div>
           <iframe class="map-frame"
             src="https://yandex.ru/map-widget/v1/?ll=86.071473%2C55.362041&z=17&l=map&pt=86.071473,55.362041,pm2rdl"
-            frameborder="0" loading="lazy"></iframe>
-          <svg class="map-flourish" viewBox="0 0 100 100" aria-hidden="true"><use href="#petal-burst"/></svg>
+            title="Карта: Кемерово, Кузнецкий проспект, 18" loading="lazy"></iframe>
         </div>
       </div>
     </section>
