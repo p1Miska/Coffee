@@ -21,7 +21,7 @@ const CATEGORIES = [
       { name: 'Латте', prices: { 300: 210, 400: 260 }, img: 'images/latte.webp', icon: 'cup' },
       { name: 'Раф', prices: { 300: 270, 400: 320 }, img: 'images/raf.webp', icon: 'cup' },
       { name: 'Американо', prices: { 200: 170, 300: 220, 400: 270 }, img: 'images/espresso-americano.webp', icon: 'cup' },
-      { name: 'Моккачино', prices: { 200: 230, 300: 280, 400: 330 }, icon: 'cup' },
+      { name: 'Моккачино', prices: { 200: 230, 300: 280, 400: 330 }, img: 'images/mochaccino.webp', icon: 'cup' },
       { name: 'Матча-латте', prices: { 300: 230, 400: 280 }, img: 'images/matcha-latte.webp', icon: 'matcha' },
       { name: 'Какао', prices: { 200: 210, 300: 260, 400: 310 }, img: 'images/cocoa.webp', icon: 'cup' },
       { name: 'Чай', prices: { 300: 100, 400: 150 }, img: 'images/tea.webp', icon: 'tea' }
@@ -30,13 +30,13 @@ const CATEGORIES = [
   {
     id: 'author', label: 'Авторское меню', sizes: [300, 400], type: 'sized',
     items: [
-      { name: 'Капучино', sub: '«Кокосовые берега»', prices: { 300: 260, 400: 310 }, icon: 'cup' },
-      { name: 'Моккачино', sub: '«Загадка домового»', prices: { 300: 330, 400: 380 }, icon: 'cup' },
+      { name: 'Капучино', sub: '«Кокосовые берега»', prices: { 300: 260, 400: 310 }, img: 'images/coconut-cappuccino.webp', icon: 'cup' },
+      { name: 'Моккачино', sub: '«Загадка домового»', prices: { 300: 330, 400: 380 }, img: 'images/mochaccino-domovoy.webp', icon: 'cup' },
       { name: 'Эспрессо-тоник', sub: '«Алый мох»', prices: { 300: 320, 400: 370 }, img: 'images/espresso-tonic-alyi-mokh.webp', icon: 'cup' },
       { name: 'Матча-латте', sub: '«Миндаль в цвету»', prices: { 300: 290, 400: 340 }, img: 'images/matcha-latte-almond.webp', icon: 'matcha' },
       { name: 'Матча-бамбл', sub: '«Сливочный персик»', prices: { 300: 350, 400: 400 }, img: 'images/matcha-bumble-peach.webp', icon: 'matcha' },
-      { name: 'Чай', sub: '«Янтарная чаша»', prices: { 300: 220, 400: 270 }, icon: 'tea' },
-      { name: 'Чай', sub: '«Ягодное лукошко»', prices: { 300: 220, 400: 270 }, icon: 'tea' }
+      { name: 'Чай', sub: '«Янтарная чаша»', prices: { 300: 220, 400: 270 }, img: 'images/tea-amber-cup.webp', icon: 'tea' },
+      { name: 'Чай', sub: '«Ягодное лукошко»', prices: { 300: 220, 400: 270 }, img: 'images/tea-berry-basket.webp', icon: 'tea' }
     ]
   }
 ];
