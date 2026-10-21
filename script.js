@@ -13,9 +13,9 @@ function icon(name){
 // The two photographed menus are the source for available sizes and prices.
 const CATEGORIES = [
   {
-    id: 'classic', label: 'Классическое меню', sizes: [200, 300, 400], type: 'sized',
+    id: 'classic', label: 'Классическое меню', sizes: [60, 200, 300, 400], type: 'sized',
     items: [
-      { name: 'Двойной эспрессо', prices: { 200: 170 }, img: 'images/espresso-americano.webp', icon: 'cup' },
+      { name: 'Двойной эспрессо', prices: { 60: 170 }, img: 'images/espresso-americano.webp', icon: 'cup' },
       { name: 'Флэт уайт', prices: { 200: 220, 300: 270, 400: 320 }, img: 'images/flat-white.webp', icon: 'cup' },
       { name: 'Капучино', prices: { 200: 180, 300: 230, 400: 280 }, img: 'images/cappuccino.webp', icon: 'cup' },
       { name: 'Латте', prices: { 300: 210, 400: 260 }, img: 'images/latte.webp', icon: 'cup' },
